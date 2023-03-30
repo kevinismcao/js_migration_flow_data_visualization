@@ -1,0 +1,29 @@
+{
+  "name": "js_migration_project",
+  "version": "1.0.0",
+  "description": "## Background 3 years after Covid-19 pandemic start, there were many speculation about emptied downtowns and the prospect of remote work. This interactive site aims to visulize the migration pattern in 2020, when the virus started to spread. Click on a specific state will show different county within state and their moving patterns.(To other counties within the state or other states.) Project current phase might focus on state California only. As the project keep moving forward I could add selections for other states as well.",
+  "main": "index.js",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "core-js": "^3.29.1",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.5",
+    "regenerator-runtime": "^0.13.11",
+    "sass": "^1.60.0",
+    "sass-loader": "^13.2.2",
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
