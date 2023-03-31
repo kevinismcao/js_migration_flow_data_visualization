@@ -18,9 +18,12 @@
 //         console.error(err);
 //     }
 // };
-export const fetchData = async (e) => {
-    const censusUrl = `https://api.census.gov/data/2020/acs/flows?get=FULL1_NAME,FULL2_NAME,MOVEDNET&for=county:*&in=state:06`
+export const fetchData = async (e) => { 
     // e.preventDefault();
+    const stateNum = "06" //or "*"this will be change as state changed currently set as California
+    const countyNum = "*" //or "*"
+    const censusUrl = `https://api.census.gov/data/2020/acs/flows?get=FULL1_NAME,STATE2,STATE2_NAME,FULL2_NAME,MOVEDNET&for=county:${countyNum}&in=state:${stateNum}`
+   
     try{
         let res = await fetch(censusUrl,{
             headers: { 'Accept':'application/json' }
@@ -47,19 +50,9 @@ export const fetchData = async (e) => {
                     migrationCount[[ele[0], migrateDes]] = 0
                 }
                 migrationCount[[ele[0], migrateDes]] += parseInt(ele[2]);
+                
             })
-
-
-
-
-            console.log(migrationCount, "mC");
-
-
-
-
-
-            
-            console.log(Array.isArray(data[1]));
+            console.log(migrationCount)
         }else{
             throw new Error(res);
         }
@@ -68,6 +61,3 @@ export const fetchData = async (e) => {
     }
 }
 
-export const doSomething = () =>{
-    console.log('hello')
-}
