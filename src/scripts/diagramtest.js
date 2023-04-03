@@ -160,6 +160,19 @@ function drawDiagramtest(data) {
     const innerRadius = Math.min(width, height) * 0.5 - 90;  
     const outerRadius = innerRadius + 20;                      
     
+    // function fade(opacity) {
+    //     return function (d, i) {
+    //         ribbons
+    //             .filter(function (d) {
+    //                 console.log(d.source.index, "source index");
+    //                 console.log(d.target.index, "target index");
+    //                 console.log(i, "i"); 
+    //                 return d.source.index != i && d.target.index != i;
+    //             })
+    //             .transition()
+    //             .style("opacity", opacity);
+    //     };
+    // }
 
     const chord = d3.chordDirected()
         .padAngle(10/innerRadius)
@@ -177,24 +190,58 @@ function drawDiagramtest(data) {
     const matrix = data;
     const chords = chord(matrix);
 
+    // const svg = d3.create("svg")
+    //     .attr("viewBox", [-width / 2, -height / 2, width, height])
+    //     .attr("font-size", 10)
+    //     .attr("font-family", "sans-serif")
+    //     .style("width", "100%")
+    //     .style("height", "auto");
+
     const svg = d3.select("#map-container")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        
+        .attr("font-size", 10)          // font size
+        .attr("font-family", "sans-serif")    // font family
+        // 
         .append("g")
         .attr("transform", `translate(${width / 2},${height / 2})`);
 
     const group = svg.append("g")
-        .attr("font-size", 10)          // font size
-        .attr("font-family", "sans-serif")    // font family
         .selectAll("g")
         .data(chords.groups)
         .join("g");
 
+    function onMouseOver(selected) {
+        // console.log(selected.toElement.__data__.index, "select index")
+        group
+            .filter(d => 
+                d.index !== selected.toElement.__data__.index
+                // console.log(d.index, "index");
+            )
+                // console.log (d.index,"index");
+                // console.log(selected.index, "select index")
+            .style("opacity", 0.3);
+        
+        svg.selectAll(".chord")
+            .filter(d => d.source.index !== selected.toElement.__data__.index)
+                // console.log(d.source.index, "source index");
+                // console.log(selected.index, "2nd select index")
+
+            .style("opacity", 0.3);
+    }
+
+    function onMouseOut() {
+        group.style("opacity", 1);
+        svg.selectAll(".chord")
+            .style("opacity", 1);
+    }
+
     group.append("path")
         .attr("fill", d => color(d.index))
-        .attr("d", arc);
+        .attr("d", arc)
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut);
 
     group.append("text")
         .each(d => (d.angle = (d.startAngle + d.endAngle) / 2))
@@ -212,29 +259,53 @@ function drawDiagramtest(data) {
     ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →
     ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);
     
+    
+    function onMouseOverRibbon(selected) {
+        console.log(selected, "selected ribbon")
+        group
+            .filter(d => d.index !== selected.toElement.__data__.source.index)
+            .style("opacity", 0.3);
+
+        svg.selectAll(".chord")
+            .filter(d => d.source.index !== selected.toElement.__data__.source.index)
+            .style("opacity", 0.3);
+    }
+
+    function onMouseOutRibbon() {
+        group.style("opacity", 1);
+        svg.selectAll(".chord")
+            .style("opacity", 1);
+    }
+
     svg.append("g")
-        .attr("fill-opacity", 0.70)
+        .attr("fill-opacity", 0.67)
         .selectAll("path")
         .data(chords)
         .join("path")
+        
         .style("mix-blend-mode", "multiply")
+        .attr("class", "chord")
         .attr("d", ribbon)
         .attr("fill", d => color(d.source.index))
         // .attr("stroke", "#000")
-        .append("title")
-        .text(d => `${d.source.index} → ${d.target.index} ${d.source.value}`)
-        // .on("mouseover", fade(0.1))
-        // .on("mouseout", fade(1));
-
+        // .append("title")
+        // .text(d => `${d.source.index} → ${d.target.index} ${d.source.value}`)
+        .on("mouseover", d => onMouseOverRibbon(d))
+        .on("mouseout", d => onMouseOutRibbon(d))
+        ;
 
     // function fade(opacity) {
-    //     return d => {
-    //         svg.selectAll("path")
-    //             .filter(target => target.source.index !== d.source.index || target.target.index !== d.target.index)
+    //     return (event, d) => {
+    //         svg.selectAll(".ribbon")
+    //             .filter(target => {
+    //                 console.log(d, target);
+    //                 return target.source.index !== d.index && target.target.index !== d.index;
+    //             })
     //             .transition()
     //             .style("opacity", opacity);
-    //     };
+    //     }
     // }
+   
 
     function color(index) {
         const colorScale = d3.scaleOrdinal()
@@ -243,6 +314,8 @@ function drawDiagramtest(data) {
 
         return colorScale(index);
     }
+
+    return svg.node();
 }
 
 export { drawDiagramtest };

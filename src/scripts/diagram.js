@@ -192,9 +192,36 @@ function drawDiagram(nameArray, data) {
         .data(chords.groups)
         .join("g");
 
+    function onMouseOver(selected) {
+        // console.log(selected.toElement.__data__.index, "select index")
+        group
+            .filter(d =>
+                d.index !== selected.toElement.__data__.index
+                // console.log(d.index, "index");
+            )
+            // console.log (d.index,"index");
+            // console.log(selected.index, "select index")
+            .style("opacity", 0.3);
+
+        svg.selectAll(".chord")
+            .filter(d => d.source.index !== selected.toElement.__data__.index)
+            // console.log(d.source.index, "source index");
+            // console.log(selected.index, "2nd select index")
+
+            .style("opacity", 0.3);
+    }
+
+    function onMouseOut() {
+        group.style("opacity", 1);
+        svg.selectAll(".chord")
+            .style("opacity", 1);
+    }
+
     group.append("path")
         .attr("fill", d => color(d.index))
-        .attr("d", arc);
+        .attr("d", arc)
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut);
 
     group.append("text")
         .each(d => (d.angle = (d.startAngle + d.endAngle) / 2))
