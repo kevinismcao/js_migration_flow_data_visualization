@@ -80,6 +80,7 @@ export const fetchData = async (e) => {
     // e.preventDefault();
     const stateNum = "*" //or "*"this will be change as state changed currently set as California
     const countyNum = "*" //or "*"
+    const name = statesArray
     const censusUrl = `https://api.census.gov/data/2020/acs/flows?get=FULL1_NAME,STATE2,STATE2_NAME,FULL2_NAME,MOVEDOUT&for=county:${countyNum}&in=state:${stateNum}`
    
     try{
@@ -88,7 +89,7 @@ export const fetchData = async (e) => {
         });
         if (res.ok){
             let data = await res.json();
-            const matrix = new Array(57).fill(0).map(x => Array(57).fill(0));
+            const matrix = new Array(name.length).fill(0).map(x => Array(name.length).fill(0));
             const migrationCount = {}
             console.log(data[5])
             data.filter(ele => ele[1] === "00")
@@ -101,10 +102,29 @@ export const fetchData = async (e) => {
                   if (!ele[4]) {
                     ele[4] = 0;
                 } 
-             
-                if (currentStateIndex >= 0 && currentStateIndex < 57 && migrateDesIndex >= 0 && migrateDesIndex < 57){
-                    matrix[currentStateIndex][migrateDesIndex] += parseInt(ele[4])
+                if (currentStateIndex === migrateDesIndex){
+                    matrix[currentStateIndex][migrateDesIndex] = 0;
+                }
+            
+                if (currentStateIndex >= 0 && currentStateIndex < 57 && migrateDesIndex >= 0 && migrateDesIndex < 57 && currentStateIndex!==migrateDesIndex){
+                    matrix[currentStateIndex][migrateDesIndex] += parseInt(ele[4]);
                 }  
+                for (let i = 0; i < name.length-1; i++){
+                    for (let j=i+1; j<name.length; j++){
+                        let num1 = matrix[i][j];
+                        let num2 = matrix[j][i];
+                        if (num1 > num2){
+                            matrix[i][j] = (num1 - num2);
+                            matrix[j][i] = 0;
+                        }else if (num1 < num2){
+                            matrix[i][j] = 0;
+                            matrix[j][i] = (num2 - num1);
+                        }else{
+                            matrix[i][j] = 0;
+                            matrix[j][i] = 0
+                        }
+                    }
+                }
             })
            return matrix
             
