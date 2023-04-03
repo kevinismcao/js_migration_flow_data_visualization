@@ -282,17 +282,15 @@ function drawDiagramtest(data) {
         .selectAll("path")
         .data(chords)
         .join("path")
-        
         .style("mix-blend-mode", "multiply")
         .attr("class", "chord")
         .attr("d", ribbon)
         .attr("fill", d => color(d.source.index))
         // .attr("stroke", "#000")
-        // .append("title")
-        // .text(d => `${d.source.index} → ${d.target.index} ${d.source.value}`)
         .on("mouseover", d => onMouseOverRibbon(d))
         .on("mouseout", d => onMouseOutRibbon(d))
-        ;
+        .append("title")
+        .text(d => `${d.source.index} → ${d.target.index} ${d.source.value}`);
 
     // function fade(opacity) {
     //     return (event, d) => {
