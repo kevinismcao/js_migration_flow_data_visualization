@@ -1,14 +1,14 @@
 import * as d3 from "d3";
-import { matrix } from "./datatest";
-import { statesArray } from "./datatest";
+import { matrix } from "./data";
+import { statesArray } from "./data";
 
 
 function drawDiagram(nameArray, data) {
     // canvas size
-    const width = 1000;                                       
-    const height = 1000;        
+    const width = 1200;                                       
+    const height = 1200;        
     //inner radius / outer radius
-    const innerRadius = Math.min(width, height) * 0.5 - 90;  
+    const innerRadius = Math.min(width, height) * 0.5 - 180;  
     const outerRadius = innerRadius + 20;                      
     
 
@@ -28,7 +28,10 @@ function drawDiagram(nameArray, data) {
     const matrix = data;
     const chords = chord(matrix);
 
-    const svg = d3.select("#map-container")
+    // var svg = d3.select("#map-container").select("svg")
+    //     svg.selectAll("*").remove()
+
+    const svg = d3.select("#diagram-container")
         .append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -36,6 +39,8 @@ function drawDiagram(nameArray, data) {
         .attr("font-family", "sans-serif")    // font family
         .append("g")
         .attr("transform", `translate(${width / 2},${height / 2})`);
+
+    
 
     const group = svg.append("g")
         .selectAll("g")
@@ -45,11 +50,11 @@ function drawDiagram(nameArray, data) {
     function onMouseOver(selected) {
         group
             .filter(d =>d.index !== selected.toElement.__data__.index)
-            .style("opacity", 0.3);
+            .style("opacity", 1);
 
         svg.selectAll(".chord")
             .filter(d => d.source.index !== selected.toElement.__data__.index)
-            .style("opacity", 0.3);
+            .style("opacity", 0.1);
     }
 
     function onMouseOut() {
@@ -59,9 +64,10 @@ function drawDiagram(nameArray, data) {
     }
 
     group.append("path")
-        .attr("fill", d => color(d.index))
+        .attr("fill", d => color(nameArray[d.index]))
         .attr("d", arc)
         .on("mouseover", onMouseOver)
+        // .on("click", onMouseOver)
         .on("mouseout", onMouseOut);
 
     group.append("text")
@@ -73,22 +79,24 @@ function drawDiagram(nameArray, data) {
             ${d.angle > Math.PI ? "rotate(180)" : ""}
         `)
         .attr("text-anchor", d => d.angle > Math.PI ? "end" : null)
-        .text(d => `${nameArray[d.index]}`);
+        .text(d => `${nameArray[d.index]}`)
+        // .style("fill", "white");
+        .style("fill", d => color(nameArray[d.index]));
 
     group.append("title")
         .text(d => `${nameArray[d.index]}
-    ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →
-    ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);
+    ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} NET MOVING OUT →
+    ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} NET MOVING IN ←`);
 
     function onMouseOverRibbon(selected) {
         console.log(selected, "selected ribbon")
         group
             .filter(d => d.index !== selected.toElement.__data__.source.index)
-            .style("opacity", 0.3);
+            .style("opacity", 1);
 
         svg.selectAll(".chord")
             .filter(d => d.source.index !== selected.toElement.__data__.source.index)
-            .style("opacity", 0.3);
+            .style("opacity", 0.1);
     }
 
     function onMouseOutRibbon() {
@@ -97,27 +105,34 @@ function drawDiagram(nameArray, data) {
             .style("opacity", 1);
     }
     svg.append("g")
-        .attr("fill-opacity", 0.70)
+        .attr("fill-opacity", 0.7)
         .selectAll("path")
         .data(chords)
         .join("path")
-        .style("mix-blend-mode", "multiply")
+        // .style("mix-blend-mode", "multiply")
         .attr("class", "chord")
         .attr("d", ribbon)
-        .attr("fill", d => color(d.source.index))
+        .attr("fill", d => color(nameArray[d.source.index]))
         // .attr("stroke", "#000")
+        // .on("click", d => onMouseOverRibbon(d))
         .on("mouseover", d => onMouseOverRibbon(d))
         .on("mouseout", d => onMouseOutRibbon(d))
         .append("title")
-        .text(d => `${nameArray[d.source.index]} → ${nameArray[d.target.index]} ${d.source.value}`)
+        .text(d => `NET MOVING OUT ${nameArray[d.source.index]} → ${nameArray[d.target.index]} ${d.source.value}`)
 
 
+
+    // function color(index) {
+    //     const colorScale = d3.scaleOrdinal()
+    //         .domain(d3.range(matrix.length))
+    //         .range(d3.schemeCategory10);
+
+    //     return colorScale(index);
+    // }
 
     function color(index) {
-        const colorScale = d3.scaleOrdinal()
-            .domain(d3.range(matrix.length))
-            .range(d3.schemeCategory10);
-
+        const colorScale = d3.scaleOrdinal(nameArray, d3.quantize(d3.interpolateRainbow, nameArray.length))
+          
         return colorScale(index);
     }
 

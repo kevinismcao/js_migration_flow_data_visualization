@@ -1,4 +1,4 @@
-const statesArray = ["Alabama",
+export const statesArray = ["Alabama",
 "Alaska",
 "Arizona",
 "Arkansas",

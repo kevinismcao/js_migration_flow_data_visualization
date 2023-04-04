@@ -1,6 +1,6 @@
 import * as d3 from "d3";
-import { matrix } from "./datatest";
-import { statesArray } from "./datatest";
+import { matrix } from "./data";
+import { statesArray } from "./data";
 // function drawDiagram(){
 // var matrix = [
 //     [0, 2, 1, 3],
@@ -256,8 +256,8 @@ function drawDiagramtest(data) {
 
     group.append("title")
         .text(d => `${d.index}
-    ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} outgoing →
-    ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} incoming ←`);
+    ${d3.sum(chords, c => (c.source.index === d.index) * c.source.value)} NET MOVE OUT →
+    ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} NET MOVE IN ←`);
     
     
     function onMouseOverRibbon(selected) {
@@ -290,7 +290,7 @@ function drawDiagramtest(data) {
         .on("mouseover", d => onMouseOverRibbon(d))
         .on("mouseout", d => onMouseOutRibbon(d))
         .append("title")
-        .text(d => `${d.source.index} → ${d.target.index} ${d.source.value}`);
+        .text(d => `NET MOVE OUT ${d.source.index} → ${d.target.index} ${d.source.value}`);
 
     // function fade(opacity) {
     //     return (event, d) => {
@@ -312,6 +312,14 @@ function drawDiagramtest(data) {
 
         return colorScale(index);
     }
+
+
+    // function color(index) {
+    //     const colorScale = d3.scaleOrdinal(names, d3.quantize(d3.interpolateRainbow, names.length))
+          
+    //     return colorScale(index);
+    // }
+
 
     return svg.node();
 }
