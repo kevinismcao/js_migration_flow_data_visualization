@@ -1,19 +1,26 @@
 import {fetchData} from "./scripts/data.js";
-import {drawDiagram} from "./scripts/test.js"; 
+import {drawDiagram} from "./scripts/diagram.js"; 
+import {getAllName} from "./scripts/names";
+import { handleSelection } from "./scripts/utils.js";
+import { statesArray } from "./scripts/states.js";
+
+// fetchData("2020", "*", "*", statesArray).then(matrix => drawDiagram(statesArray, matrix))
+
+document.getElementById("submit-button").addEventListener("click",function(event){
+    event.preventDefault();
+    const svgContainer = document.getElementById('diagram-container');
+    const firstSvg = svgContainer.querySelector('svg');
+    if (firstSvg) {
+        svgContainer.removeChild(firstSvg);
+    }
+    handleSelection();
+})
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    window.test = fetchData()
-    // window.test = function(){ console.log('hello')}
-    const data = [
-        [11975, 5871, 8916, 2868],
-        [1951, 10048, 2060, 6171],
-        [8010, 16145, 8090, 8045],
-        [1013, 990, 940, 6907]
-    ];
-    // const canvas = document.getElementById("map-canvas");
-    // console.log(canvas, "canvas");
-    drawDiagram();
 
-});
+// const matrixName = getAllName("California")
 
+// const stateNum = "06"
+// const countyNum = "*"
+// const year = 2020
+// fetchData(year, countyNum, stateNum, matrixName).then(matrix => drawDiagram(matrixName, matrix))

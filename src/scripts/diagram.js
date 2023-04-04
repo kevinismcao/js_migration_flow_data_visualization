@@ -5,10 +5,10 @@ import { statesArray } from "./data";
 
 function drawDiagram(nameArray, data) {
     // canvas size
-    const width = 1200;                                       
-    const height = 1200;        
+    const width = 1000;                                       
+    const height = 1000;        
     //inner radius / outer radius
-    const innerRadius = Math.min(width, height) * 0.5 - 180;  
+    const innerRadius = Math.min(width, height) * 0.5 - 160;  
     const outerRadius = innerRadius + 20;                      
     
 
@@ -35,7 +35,7 @@ function drawDiagram(nameArray, data) {
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("font-size", 10)          // font size
+        .attr("font-size", 8)          // font size
         .attr("font-family", "sans-serif")    // font family
         .append("g")
         .attr("transform", `translate(${width / 2},${height / 2})`);
@@ -89,7 +89,6 @@ function drawDiagram(nameArray, data) {
     ${d3.sum(chords, c => (c.target.index === d.index) * c.source.value)} NET MOVING IN ←`);
 
     function onMouseOverRibbon(selected) {
-        console.log(selected, "selected ribbon")
         group
             .filter(d => d.index !== selected.toElement.__data__.source.index)
             .style("opacity", 1);
