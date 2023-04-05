@@ -1,0 +1,121 @@
+body {
+    background-color: #191F24;
+    color: antiquewhite;
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    // background-color: mix(#fff, $primary-color, 90%);
+}
+
+h2 {
+    display: none;
+}
+
+#title {
+    font-size: 25px;
+    width: 100%;
+    height: 20px;
+    position: relative;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#header {
+    font-size: 50px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+    margin-bottom: 0.375em;
+
+    /* Accessible outline */
+    /* Remove comment to use */
+    /*
+		&:focus-within {
+				outline: .125em solid $primary-color;
+		}
+	*/
+    input {
+        position: absolute;
+        left: -9999px;
+
+        &:checked+span {
+            border: 2px solid antiquewhite;
+
+            &:before {
+                box-shadow: inset 0 0 0 0.4375em antiquewhite;
+            }
+        }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        border-radius: 99em; // or something higher...
+        transition: 0.25s ease;
+
+        &:hover {
+            background-color: mix(#fff, $primary-color, 20%);
+        }
+
+        &:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: #151A1E;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 0 0.125em antiquewhite;
+        }
+    }
+}
+
+form {
+    position: absolute;
+    top: 150px;
+    right: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 280px;
+    height: 100px;
+    // margin-left: 200px;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 1em;
+    // border: 2px solid antiquewhite;
+    // background-color: mix(#fff, $primary-color, 30%)
+    z-index: 99;
+}
+
+#submit-button {
+    color: antiquewhite;
+    display: flex;
+    margin-left: 30px;
+    height: 33.75px;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 0.375em;
+    padding: 0.5em 0.75em 0.375em 0.75em;
+    border-radius: 99em; // or something higher...
+    border: 2px solid antiquewhite;
+    background-color: #151A1E;
+
+    &:hover {
+        background-color: mix(#fff, $primary-color, 20%);
+    }
+}

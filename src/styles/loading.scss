@@ -1,0 +1,49 @@
+.loading-container {
+    display: block;
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 200px);
+    // right: 150%;
+    text-align: center;
+}
+
+
+.loading {
+    position: relative;
+    width: 400px;
+    height: 100px;
+    border-bottom: 5px solid antiquewhite;
+
+    overflow: hidden;
+}
+
+
+
+.truck {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: move 4s linear infinite;
+}
+
+#loading-text {
+    margin-top: 20px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+@keyframes move {
+    0% {
+        left: -25%;
+    }
+
+    100% {
+        left: 125%;
+    }
+}

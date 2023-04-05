@@ -1,6 +1,7 @@
 @import './styles/reset.scss';
-@import './styles/new.scss';
-$primary-color: #00005c; // Change color here. C'mon, try it! 
+// @import './styles/new.scss';
+
+$primary-color: #00005c;
 $text-color: mix(#000, $primary-color, 64%);
 
 
@@ -12,14 +13,27 @@ body {
     // background-color: mix(#fff, $primary-color, 90%);
 }
 
-h1 {
-    font-size: 50px;
+h2{
+    display:none;
+    
+    
+}
+
+#title{
+    font-size: 25px;
+    width: 100%;
+    height: 20px;
+    position: relative;
+    text-align: center;
+    margin-top: 30px;
 }
 
 #header {
+    font-size: 50px;
     position: relative;
     text-align: center;
-    margin: 20px;
+    width: 100%;
+    margin-top: 30px;
 }
 
 #main-body {
@@ -31,12 +45,41 @@ h1 {
     
 }
 
-#diagram-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#instruction {
+        position: absolute;
+        top: 150px;
+        left: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 280px;
+        height: 200px;
+        // margin-left: 200px;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 1em;
+        text-align: center;
+        border: 2px solid antiquewhite;
+        // background-color: mix(#fff, $primary-color, 30%)
+        z-index: 99;
+        margin: 5px;
+
 }
+
+#instruction p{
+    display: inline;
+    line-height: 20px;
+    margin: 5px;
+}
+
+h3 {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    width: 280px;
+    text-align: center;
+}
+
+
 
 label {
     display: flex;
@@ -95,8 +138,7 @@ label {
 
 form {
     position: absolute;
-        
-    top: 10px;
+    top: 150px;
     right: 100px;
     display: flex;
     flex-wrap: wrap;
@@ -108,6 +150,7 @@ form {
     border-radius: 1em;
     // border: 2px solid antiquewhite;
     // background-color: mix(#fff, $primary-color, 30%)
+    z-index: 99;
     }
 
 #submit-button{
@@ -148,11 +191,151 @@ select#pick-states {
     background-color: #151A1E;
 }
 
-div#instruction-nav {
+#diagram-container {
     position: absolute;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tooltip {
+    position: absolute;
+    right: 70px;
+    bottom: 40px;
+    opacity: 0.3;
+    width: 160px;
+    margin: 20px;
+    height: 120px;
+    padding: 10px;
+    color: antiquewhite;
+    line-height: 20px;
+    border-radius: 20px;
+    background-color: #151A1E;
+    border: 3px solid antiquewhite;
+}
+
+.chord{
+ cursor: pointer;
+}
+
+.loading-container{
+    display: block;
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 200px);
+    // right: 150%;
+    text-align: center;
+}
+
+
+.loading {
+    position: relative;
+    width: 400px;
+    height: 100px;
+    border-bottom: 5px solid antiquewhite;
+    
+    overflow: hidden;
+}
+
+
+
+.truck {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: move 4s linear infinite;
+}
+
+#loading-text{
+    margin-top: 20px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+
+@keyframes move {
+    0% {
+        left:  -25%;
+    }
+
+    100% {
+        left: 125%;
+    }
+}
+// footer{
+//     position: fixed;
+//         left: 0;
+//         bottom: 0;
+//         width: 100%;
+//         color: white;
+//         display: flex;
+//         align-items: flex-start;
+// }
+#powered-by {}
+
+#footer-nav {
+    position: fixed;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    justify-content: space-between;
+    
+    bottom: 0;
+    width: 100vw;
+}
+
+div#acknowledgement,
+div#personal-links {
+    position: relative;
+    align-self: baseline;
+}
+
+a {
+    color: white;
+}
+
+#data-source {
+    color: antiquewhite;
+    font-size: 14px;
+    margin: 20px;
+    margin-left: 40px;
+}
+
+#census-logo {
+    cursor: pointer;
+    margin-left: -10px;
+    height: 30px;
+}
+
+#personal-links ul {
+    display: flex;
+    margin: 20px;
+}
+
+#personal-links img{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+#github {
+    margin-right: 10px;
+    transition: transform .2s;
+}
+
+#github:hover {
+    transform: scale(1.2);
+}
+
+#linkedin {
+    margin-left: 10px;
+    margin-right: 40px;
+    transition: transform .2s;
+}
+
+#linkedin:hover {
+    transform: scale(1.2);
 }
