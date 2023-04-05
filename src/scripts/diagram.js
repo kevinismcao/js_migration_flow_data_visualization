@@ -1,9 +1,10 @@
 import * as d3 from "d3";
+import Chart from 'chart.js/auto';
 import { matrix } from "./data";
 import { statesArray } from "./data";
 
 
-function drawDiagram(nameArray, data) {
+function drawDiagram(year, nameArray, data) {
     // canvas size
     const width = 1000;                                       
     const height = 1000;        
@@ -134,6 +135,31 @@ function drawDiagram(nameArray, data) {
           
         return colorScale(index);
     }
+
+    const tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
+
+    svg.selectAll('.chord')
+        .on('click', (event, d) => {
+            
+            tooltip.transition().duration(200).style('opacity', 0.9);
+            tooltip.html(`${year} ${nameArray[d.source.index]}<br>Target State: ${nameArray[d.target.index]}<br>Net Move Out Population: ${d.source.value}`)
+                // .style('right', (event.pageX + 100) + 'px')
+                // .style('top', (event.pageY - 28) + 'px');
+                // .style('left', (event.pageX + 100) + 'px')
+                // .style('top', (event.pageY - 28) + 'px');
+            
+        })
+        // .on('mouseout', () => {
+            
+        //     tooltip.transition().duration(500).style('opacity', 0);
+            
+        // });
+    
+
+
+
 
     return svg.node();
 }

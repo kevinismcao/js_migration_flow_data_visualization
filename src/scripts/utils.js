@@ -8,8 +8,10 @@ export function handleSelection(){
     const matrixName = getAllName(selectedName.split(", ")[1]);
     const countyNum = "*";
     const year = document.querySelector('input[name="select-year"]:checked').value;
-
-    fetchData(year, countyNum, stateNum, matrixName).then(matrix => drawDiagram(matrixName, matrix))
+    
+    fetchData(year, countyNum, stateNum, matrixName).then(matrix => drawDiagram(year, matrixName, matrix))
+    
+   
 }
 
 
