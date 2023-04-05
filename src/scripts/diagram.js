@@ -164,7 +164,7 @@ function drawDiagram(year, nameArray, data) {
 
 
 
-
+    document.getElementById("loading-container").style.display = "none"
     return svg.node();
 }
 

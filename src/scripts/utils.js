@@ -14,7 +14,7 @@ export function handleSelection(){
     if (stateName === "*"){
         diagramName.innerHTML = `${year} US State to State migration`;
     }else{
-        diagramName.innerHTML = `${year} ${selectedName} migration`;
+        diagramName.innerHTML = `${year} ${stateName} migration`;
     };
     fetchData(year, countyNum, stateNum, matrixName).then(matrix => drawDiagram(year, matrixName, matrix))
     
