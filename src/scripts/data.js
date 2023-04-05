@@ -76,7 +76,8 @@ export const fetchData = async (year, countyNum, stateNum, statesArray) => {
                     }
                 }
             })
-            document.getElementById("loading").style.display = "none"
+            document.getElementById("loading-container").style.display = "none"
+            document.getElementById("diagram-title").style.display = "block"
            return matrix
             
         }else{
@@ -221,7 +222,8 @@ export const fetchStateData = async ( ) => {
                     }
                 }
             })
-            document.getElementById("loading").style.display = "none";
+            
+            document.getElementById("diagram-title").style.display = "block"
             return matrix
 
         } else {

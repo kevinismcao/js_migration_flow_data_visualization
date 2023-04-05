@@ -92,7 +92,7 @@ function drawDiagram(year, nameArray, data) {
     function onMouseOverRibbon(selected) {
         group
             .filter(d => d.index !== selected.toElement.__data__.source.index)
-            .style("opacity", 1);
+            .style("opacity", 0.7);
 
         svg.selectAll(".chord")
             .filter(d => d.source.index !== selected.toElement.__data__.source.index)
@@ -103,6 +103,7 @@ function drawDiagram(year, nameArray, data) {
         group.style("opacity", 1);
         svg.selectAll(".chord")
             .style("opacity", 1);
+        tooltip.transition().duration(1000).style('opacity', 0); 
     }
     svg.append("g")
         .attr("fill-opacity", 0.7)
@@ -145,15 +146,18 @@ function drawDiagram(year, nameArray, data) {
             
             tooltip.transition().duration(200).style('opacity', 0.9);
             tooltip.html(`${year} ${nameArray[d.source.index]}<br>Target State: ${nameArray[d.target.index]}<br>Net Move Out Population: ${d.source.value}`)
-                // .style('right', (event.pageX + 100) + 'px')
+            // tooltip.transition().duration(1000).style('opacity', 0);    
+            // .style('right', (event.pageX + 100) + 'px')
                 // .style('top', (event.pageY - 28) + 'px');
                 // .style('left', (event.pageX + 100) + 'px')
                 // .style('top', (event.pageY - 28) + 'px');
-            
+            svg.selectAll(".chord")
+                .filter(e => e !== d)
+                .style("opacity", 0.1);
         })
         // .on('mouseout', () => {
             
-        //     tooltip.transition().duration(500).style('opacity', 0);
+        //     
             
         // });
     
