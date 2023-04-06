@@ -293,6 +293,7 @@ div#acknowledgement,
 div#personal-links {
     position: relative;
     align-self: baseline;
+    vertical-align: bottom;
 }
 
 a {
@@ -315,6 +316,15 @@ a {
 #personal-links ul {
     display: flex;
     margin: 20px;
+}
+
+#author-name{
+    color: antiquewhite;
+    font-size: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: auto;
+    vertical-align: bottom;
 }
 
 #personal-links img{

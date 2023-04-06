@@ -14,7 +14,7 @@ function drawDiagram(year, nameArray, data) {
     
 
     const chord = d3.chordDirected()
-        .padAngle(10/innerRadius)
+        .padAngle(5/innerRadius)
         .sortSubgroups(d3.descending)
         .sortChords(d3.descending);
 
