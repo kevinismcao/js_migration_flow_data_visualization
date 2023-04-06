@@ -31,7 +31,7 @@ export function modeSwitch(currentMode){
     document.getElementById("submit-button").style.border = `2px solid ${switchColor}`;
     document.getElementById("pick-states").style.color = switchColor;
     document.getElementById("pick-states").style.border = `2px solid ${switchColor}`;
-    document.getElementById("loading").style.border = `5px solid ${switchColor}`;
+   
     document.getElementById("data-source").style.color = switchColor;
     document.getElementById("dark-light-switch").style.color = switchColor;
     document.getElementById("dark-light-switch").style.border = `2px solid ${switchColor}`;
