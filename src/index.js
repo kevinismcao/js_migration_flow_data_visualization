@@ -31,7 +31,6 @@ document.getElementById("submit-button").addEventListener("click",function(event
 
 document.getElementById("dark-light-switch").addEventListener("click", function(event){
     event.preventDefault();
-    console.log("hello")
     let currentMode = document.getElementById("dark-light-switch").value;
     modeSwitch(currentMode);
     if (currentMode === "dark"){

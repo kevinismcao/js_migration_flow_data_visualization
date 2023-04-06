@@ -161,7 +161,6 @@ export const fetchStateData = async ( ) => {
             let data = await res.json();
             const matrix = new Array(names.length).fill(0).map(x => Array(names.length).fill(0));
 
-            console.log(data[5])
             function inState(value) {
                 if (value === "00") {
                     return true

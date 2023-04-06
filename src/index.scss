@@ -201,8 +201,8 @@ select#pick-states {
 
 .tooltip {
     position: absolute;
-    right: 70px;
-    bottom: 50px;
+    right: 100px;
+    bottom: 130px;
     opacity: 0.3;
     width: 160px;
     margin: 20px;
@@ -343,8 +343,8 @@ a {
 
 #dark-light-switch {
     position: fixed;
-    top:100px;
-    right: 120px;
+    bottom: 80px;
+    right: 50px;
     width: 70px;
     
     color: antiquewhite;
@@ -362,7 +362,7 @@ a {
     text-align: center;
     
         &:hover {
-            background-color: mix(#fff, $primary-color, 20%);
+            background-color: mix(#fff, $primary-color, 50%);
         }
     div {
         position: relative;
