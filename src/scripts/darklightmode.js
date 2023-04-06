@@ -12,6 +12,7 @@ export function modeSwitch(currentMode){
         document.getElementById("linkedin-pic").src = "image/linkedin-dark.png";
         document.getElementById("dark-light-img").src = "image/light_02.png";
         document.getElementById("dark-light-text").innerHTML = "light";
+        document.getElementById("instruction").style.backgroundColor = `#151A1E`;
     }else{
         document.getElementsByTagName("body")[0].style.backgroundColor = 'white';
         document.getElementById("submit-button").style.backgroundColor = 'white';
@@ -22,6 +23,7 @@ export function modeSwitch(currentMode){
         document.getElementById("dark-light-switch").style.backgroundColor = 'white';
         document.getElementById("dark-light-img").src = "image/dark_02.png";
         document.getElementById("dark-light-text").innerHTML = "dark";
+        document.getElementById("instruction").style.backgroundColor = `white`;
     }
     
     document.getElementsByTagName("body")[0].style.color = switchColor;

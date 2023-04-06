@@ -50,8 +50,15 @@ function drawDiagram(year, nameArray, data) {
 
     function onMouseOver(selected) {
         group
+            .filter(d => d.index === selected.toElement.__data__.index)
+            .transition()
+            .duration(200)
+            .style("font-size", "20px");
+
+        group
             .filter(d =>d.index !== selected.toElement.__data__.index)
-            .style("opacity", 1);
+            .style("opacity", 1)
+            // .style("font-size", "15px");
 
         svg.selectAll(".chord")
             .filter(d => d.source.index !== selected.toElement.__data__.index)
@@ -59,7 +66,10 @@ function drawDiagram(year, nameArray, data) {
     }
 
     function onMouseOut() {
-        group.style("opacity", 1);
+        group.style("opacity", 1)
+            .transition()
+            .duration(200)
+            .style("font-size", "8px");
         svg.selectAll(".chord")
             .style("opacity", 1);
     }
@@ -91,8 +101,15 @@ function drawDiagram(year, nameArray, data) {
 
     function onMouseOverRibbon(selected) {
         group
+            .filter(d => d.index === selected.toElement.__data__.source.index)
+            .transition()
+            .duration(200)
+            .style("font-size", "20px");
+
+        group
             .filter(d => d.index !== selected.toElement.__data__.source.index)
             .style("opacity", 0.7);
+            
 
         svg.selectAll(".chord")
             .filter(d => d.source.index !== selected.toElement.__data__.source.index)
@@ -100,7 +117,10 @@ function drawDiagram(year, nameArray, data) {
     }
 
     function onMouseOutRibbon() {
-        group.style("opacity", 1);
+        group.style("opacity", 1)
+            .transition()
+            .duration(200)
+            .style("font-size", "8px");
         svg.selectAll(".chord")
             .style("opacity", 1);
         tooltip.transition().duration(1000).style('opacity', 0); 
