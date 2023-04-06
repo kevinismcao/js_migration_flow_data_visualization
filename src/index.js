@@ -4,7 +4,7 @@ import {drawDiagram} from "./scripts/diagram.js";
 import {getAllName} from "./scripts/names";
 import { handleSelection } from "./scripts/utils.js";
 import { statesArray } from "./scripts/states.js";
-
+import { modeSwitch } from "./scripts/darklightmode.js";
 
 
 
@@ -29,9 +29,14 @@ document.getElementById("submit-button").addEventListener("click",function(event
 
 
 
-// const matrixName = getAllName("California")
-
-// const stateNum = "06"
-// const countyNum = "*"
-// const year = 2020
-// fetchData(year, countyNum, stateNum, matrixName).then(matrix => drawDiagram(matrixName, matrix))
+document.getElementById("dark-light-switch").addEventListener("click", function(event){
+    event.preventDefault();
+    console.log("hello")
+    let currentMode = document.getElementById("dark-light-switch").value;
+    modeSwitch(currentMode);
+    if (currentMode === "dark"){
+    document.getElementById("dark-light-switch").value = "light";
+    }else{
+        document.getElementById("dark-light-switch").value = "dark";
+    }
+})

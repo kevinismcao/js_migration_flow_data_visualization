@@ -1,7 +1,7 @@
 @import './styles/reset.scss';
 // @import './styles/new.scss';
 
-$primary-color: #00005c;
+$primary-color: #191F24;
 $text-color: mix(#000, $primary-color, 64%);
 
 
@@ -21,6 +21,7 @@ h2{
 
 #title{
     font-size: 25px;
+    font-weight: 400;
     width: 100%;
     height: 20px;
     position: relative;
@@ -201,7 +202,7 @@ select#pick-states {
 .tooltip {
     position: absolute;
     right: 70px;
-    bottom: 40px;
+    bottom: 50px;
     opacity: 0.3;
     width: 160px;
     margin: 20px;
@@ -276,7 +277,7 @@ img{
 //         display: flex;
 //         align-items: flex-start;
 // }
-#powered-by {}
+
 
 #footer-nav {
     position: fixed;
@@ -338,4 +339,47 @@ a {
 
 #linkedin:hover {
     transform: scale(1.2);
+}
+
+#dark-light-switch {
+    position: fixed;
+    top:100px;
+    right: 120px;
+    width: 70px;
+    
+    color: antiquewhite;
+    display: flex;
+    height: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    overflow: hidden;
+    
+    margin-bottom: 0.375em;
+    padding: 0.5em 0.75em 0.75em 0.75em;
+    border-radius: 99em; // or something higher...
+    border: 2px solid antiquewhite;
+    background-color: #151A1E;
+    text-align: center;
+    
+        &:hover {
+            background-color: mix(#fff, $primary-color, 20%);
+        }
+    div {
+        position: relative;
+        // display: flex;
+        // top: -8px;
+        width: 40px;
+        height: 28px;
+
+    }
+}
+
+#dark-light-img {
+    top: -8px;
+    right: -5px;
+    position: relative;
+    display: flex;
+    width: 28px;
+    height: 28px;
+
 }
