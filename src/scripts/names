@@ -6616,7 +6616,6 @@ export function getAllName(stateName) {
         "Puerto Rico",
         "U.S.Minor Outlying Islands",
         "U.S.Virgin Islands"];
-        console.log(stateName,"statename")
     if (stateName === ("*")){
         return statesArray
     }else{

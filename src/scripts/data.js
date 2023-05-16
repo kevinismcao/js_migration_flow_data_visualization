@@ -1,9 +1,5 @@
 
-export const fetchData = async (year, countyNum, stateNum, statesArray) => { 
-    // e.preventDefault();
-    // const stateNum = "*" //or "*"this will be change as state changed currently set as California
-    // const countyNum = "*" //or "*"
-    
+export const fetchData = async (year, countyNum, stateNum, statesArray) => {    
     const names = statesArray
     const censusUrl = `https://api.census.gov/data/${year}/acs/flows?get=FULL1_NAME,STATE2,STATE2_NAME,FULL2_NAME,MOVEDOUT&for=county:${countyNum}&in=state:${stateNum}`
    
@@ -14,8 +10,6 @@ export const fetchData = async (year, countyNum, stateNum, statesArray) => {
         if (res.ok){
             let data = await res.json();
             const matrix = new Array(names.length).fill(0).map(x => Array(names.length).fill(0));
-           
-            console.log(data[5])
             function inState(value){
                 if (value === "00"){
                     return true
