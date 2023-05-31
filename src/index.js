@@ -13,7 +13,10 @@ fetchStateData().then(matrix => drawDiagram(2020, statesArray, matrix));
 
 document.getElementById("submit-button").addEventListener("click",function(event){
     event.preventDefault();
-    document.getElementById("loading-container").style.display = "block"
+    // console.log(true)
+    // console.log(document.getElementById("instruction-submit"))
+    document.getElementById("instruction-submit").style.display = "none";
+    document.getElementById("loading-container").style.display = "block";
     const svgContainer = document.getElementById('diagram-container');
     
     const firstSvg = svgContainer.querySelector('svg');
@@ -22,9 +25,6 @@ document.getElementById("submit-button").addEventListener("click",function(event
     }
     
     handleSelection();
-    // if (firstSvg) {
-    //     loadingDiv.style.display = "none";
-    // }
 })
 
 

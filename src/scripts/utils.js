@@ -17,8 +17,7 @@ export function handleSelection(){
         diagramName.innerHTML = `${year} ${stateName} migration`;
     };
     fetchData(year, countyNum, stateNum, matrixName).then(matrix => drawDiagram(year, matrixName, matrix))
-    
-   
+    // document.getElementById("submit-form").style.display = "none";
 }
 
 

@@ -217,6 +217,7 @@ export const fetchStateData = async ( ) => {
             })
             
             document.getElementById("diagram-title").style.display = "block"
+            document.getElementById("instruction-submit").style.display = "flex";
             return matrix
 
         } else {

@@ -252,11 +252,11 @@ label span:before {
   box-shadow: inset 0 0 0 0.125em antiquewhite;
 }
 
-form {
+#instruction-submit {
   position: absolute;
   top: 150px;
   right: 100px;
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   width: 280px;
   height: 100px;

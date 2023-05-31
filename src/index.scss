@@ -138,11 +138,11 @@ label {
     }
 }
 
-form {
+#instruction-submit{
     position: absolute;
     top: 150px;
     right: 100px;
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     width: 280px;
     height: 100px;

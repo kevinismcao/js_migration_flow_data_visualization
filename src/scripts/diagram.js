@@ -183,8 +183,9 @@ function drawDiagram(year, nameArray, data) {
     
 
 
-
+    
     document.getElementById("loading-container").style.display = "none"
+    document.getElementById("instruction-submit").style.display = "flex";
     return svg.node();
 }
 
